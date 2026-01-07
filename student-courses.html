@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses - Learn with Nipun</title>
+    <link rel="stylesheet" href="https://sasankpandrakula.github.io/learn-withp-Nipun/style.css">
+    <style>
+        body {
+        /* Using the background image as requested */
+        background-image: url('https://sasankpandrakula.github.io/learn-withp-Nipun/background_image.png');
+        background-size: cover;
+        background-attachment: fixed;
+        background-position: center;
+        color: #333;
+        min-height: 100vh;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="top-bar">
+            <div class="logo-container">
+                <img src="https://sasankpandrakula.github.io/learn-withp-Nipun/Logo.png" alt="Learn with Nipun Logo" class="logo-img">
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search...">
+            </div>
+            <div class="profile-section">
+                <span>Name</span>
+                <div class="profile-pic">Profile Pic</div>
+            </div>
+        </div>
+        <nav>
+            <a href="https://sasankpandrakula.github.io/learn-withp-Nipun/home.html">Home</a>
+            <a href="https://sasankpandrakula.github.io/learn-withp-Nipun/courses.html" class="active">Courses</a>
+            <a href="https://sasankpandrakula.github.io/learn-withp-Nipun/mycourses.html">MyCourses</a>
+            <a href="#">Assignments</a>
+            <a href="#">Schedules</a>
+            <a href="#">Notes</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2>Available Courses</h2>
+
+        <div class="course-card">
+            <div class="course-header">
+                <h3 class="course-title">Web Development Bootcamp</h3>
+                <button class="subscribe-btn" onclick="subscribeCourse('c1', 'Web Development Bootcamp')">Subscribe</button>
+            </div>
+            <p>Learn HTML, CSS, and JavaScript from scratch. Build real projects.</p>
+        </div>
+
+        <div class="course-card">
+            <div class="course-header">
+                <h3 class="course-title">Data Science Fundamentals</h3>
+                <button class="subscribe-btn" onclick="subscribeCourse('c2', 'Data Science Fundamentals')">Subscribe</button>
+            </div>
+            <p>Master Python and analyze data with Pandas and NumPy.</p>
+        </div>
+
+        <div class="course-card">
+            <div class="course-header">
+                <h3 class="course-title">Graphic Design Masterclass</h3>
+                <button class="subscribe-btn" onclick="subscribeCourse('c3', 'Graphic Design Masterclass')">Subscribe</button>
+            </div>
+            <p>Learn Photoshop, Illustrator, and design principles.</p>
+        </div>
+    </div>
+
+    <script>
+        function subscribeCourse(id, name) {
+            // Ask for confirmation
+            if (confirm("Are you sure you want to subscribe to " + name + "?")) {
+                
+                // Get existing courses from Local Storage (simulating a database)
+                let myCourses = JSON.parse(localStorage.getItem('myCourses')) || [];
+                
+                // Check if already subscribed
+                if (!myCourses.some(course => course.id === id)) {
+                    myCourses.push({ id: id, name: name, progress: 0 });
+                    localStorage.setItem('myCourses', JSON.stringify(myCourses));
+                    
+                    // Set a flag to identify the newly added course on the next page
+                    localStorage.setItem('justSubscribed', id);
+                    
+                    // Navigate to My Courses
+                    window.location.href = "mycourses.html";
+                } else {
+                    alert("You are already subscribed to this course!");
+                    window.location.href = "mycourses.html";
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>
